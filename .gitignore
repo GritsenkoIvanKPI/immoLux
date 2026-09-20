@@ -1,0 +1,20 @@
+# macOS
+.DS_Store
+
+# Design references (screenshots of a third-party website)
+desktop.png
+desktop2.png
+
+# Original source material (photos as delivered, client exposé)
+photo/
+*.pdf
+
+# Internal workflow notes
+CLAUDE.md
+SKILL.md
+SKILL canvas.md
+GEMINI_IMAGE_GENERATION.md
+
+# Local
+node_modules/
+temporary screenshots/

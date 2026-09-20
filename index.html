@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ImmoLux Germany — Immobilien in Leipzig</title>
+  <meta name="description" content="ImmoLux Germany Immobilien — ausgewählte Wohnimmobilien in Leipzig und Umgebung. Zuhause · Werte · Zukunft.">
+  <meta name="theme-color" content="#093418">
+  <meta property="og:title" content="ImmoLux Germany Immobilien">
+  <meta property="og:image" content="assets/img/site/hero-home.jpg">
+  <link rel="icon" type="image/png" href="assets/img/brand/favicon.png">
+  <link rel="apple-touch-icon" href="assets/img/brand/apple-touch-icon.png">
+  <link rel="preload" as="image" href="assets/img/site/hero-home.jpg">
+  <link rel="stylesheet" href="assets/css/fonts.css">
+  <link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body data-page="home" data-title="meta.home" data-header="overlay">
+  <header id="site-header" class="site-header"></header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="hero__media">
+        <img src="assets/img/site/hero-home.jpg" alt="" width="2400" height="1340" fetchpriority="high">
+        <div class="grain"></div>
+      </div>
+      <div class="hero__content container stagger">
+        <p class="hero__badge">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 11 12 4l8.5 7M6 9.5V20h12V9.5"/><path d="M10 20v-5h4v5"/></svg>
+          <span data-i18n="home.badge">ImmoLux Germany Immobilien</span>
+        </p>
+        <h1 class="hero__title">
+          <span data-i18n="home.title.a">Ihr neues Zuhause</span>
+          <span class="hero__line"><span data-i18n="home.title.b">in</span> <em data-i18n="home.title.em">Leipzig</em></span>
+        </h1>
+        <a class="btn btn--light" href="immobilien.html"><span data-i18n="home.cta">Immobilien ansehen</span><svg class="icon icon--nudge" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section__head">
+          <div>
+            <p class="eyebrow" data-i18n="home.featured.eyebrow">Aktuelle Angebote</p>
+            <h2 class="h2" data-i18n="home.featured.title">Neu im Portfolio</h2>
+          </div>
+          <a class="link-arrow" href="immobilien.html"><span data-i18n="home.featured.all">Alle Immobilien</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+        <div class="cards" id="featured"></div>
+      </div>
+    </section>
+
+    <section class="section section--tight">
+      <div class="container">
+        <div class="section__head">
+          <div>
+            <p class="eyebrow" data-i18n="home.values.eyebrow">ImmoLux Germany</p>
+            <h2 class="h2" data-i18n="home.values.title">Wofür wir stehen</h2>
+          </div>
+        </div>
+        <div class="values">
+          <article class="value reveal">
+            <span class="value__num">01</span>
+            <h3 data-i18n="home.values.1.title">Zuhause</h3>
+            <p data-i18n="home.values.1.text"></p>
+          </article>
+          <article class="value reveal">
+            <span class="value__num">02</span>
+            <h3 data-i18n="home.values.2.title">Werte</h3>
+            <p data-i18n="home.values.2.text"></p>
+          </article>
+          <article class="value reveal">
+            <span class="value__num">03</span>
+            <h3 data-i18n="home.values.3.title">Zukunft</h3>
+            <p data-i18n="home.values.3.text"></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--tight">
+      <div class="container">
+        <div class="cta-band reveal">
+          <div class="cta-band__media" aria-hidden="true"><img src="assets/img/site/cta-bg.jpg" alt="" loading="lazy" width="2400" height="1018"></div>
+          <h2 data-i18n="cta.title">Nicht das passende Angebot gefunden?</h2>
+          <p data-i18n="cta.text"></p>
+          <a class="btn btn--primary" href="kontakt.html?subject=search" data-i18n="cta.button">Suchprofil senden</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="site-footer" class="site-footer"></footer>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/properties.js"></script>
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/pages/home.js"></script>
+</body>
+</html>
