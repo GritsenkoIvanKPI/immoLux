@@ -268,7 +268,6 @@
     var el = document.getElementById('site-header');
     if (!el) return;
     var c = CONFIG.contact;
-    if (document.body.getAttribute('data-header') === 'overlay') el.classList.add('site-header--overlay');
     el.innerHTML =
       '<a class="skip-link" href="#main">' + esc(t('nav.skip')) + '</a>' +
       '<div class="header__inner container">' +
@@ -279,7 +278,6 @@
         '</nav>' +
         '<a class="brand" href="index.html" aria-label="ImmoLux Germany — ' + esc(t('nav.home')) + '">' +
           '<img class="brand__logo" src="assets/img/brand/logo-header.png" alt="ImmoLux Germany" width="760" height="445">' +
-          '<img class="brand__logo brand__logo--light" src="assets/img/brand/logo-header-white.png" alt="" width="760" height="445">' +
         '</a>' +
         '<div class="header__tools">' +
           langSwitch() +
@@ -376,8 +374,7 @@
   function watchHeaderShadow() {
     var header = document.getElementById('site-header');
     if (!header) return;
-    var threshold = header.classList.contains('site-header--overlay') ? 60 : 4;
-    var update = function () { header.classList.toggle('is-scrolled', window.scrollY > threshold); };
+    var update = function () { header.classList.toggle('is-scrolled', window.scrollY > 4); };
     window.addEventListener('scroll', update, { passive: true });
     update();
   }
