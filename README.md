@@ -38,6 +38,19 @@ Useful fields:
 - `price: null` shows "Preis auf Anfrage".
 - `marketing: 'rent'` treats `price` as monthly rent.
 - The NEU badge appears automatically for 30 days after `listedAt`.
+- Leave `lat` / `lng` out of `location` and the map section is hidden.
+
+## Several apartments in one building
+
+A property can list individual apartments via `units` (see `leipzig-breitenfeld-4-zimmer`).
+Each unit has its own `ref`, `title`, `rooms`, `livingArea`, `floor`, `price`, `facts`,
+`roomsPlan` (room list from the floor plan) and `images` — the photos go in the same
+property folder, e.g. `we5-01-wohnen.jpg`.
+
+The page then shows the units in a "Wohnungen im Haus" section, each with its own photos,
+data and an "Diese Wohnung anfragen" button that preselects the apartment in the form.
+Price, living area and rooms shown at the top and on the listings page are derived from the
+units ("ab 107.000 €", "46,11 – 100,76 m²").
 
 ## Contact details and forms
 

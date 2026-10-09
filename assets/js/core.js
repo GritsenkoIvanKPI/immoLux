@@ -103,6 +103,54 @@
     return s;
   }
 
+  function unitsOf(p) { return (p.units || []).filter(function (u) { return u.status !== 'sold'; }); }
+
+  // Lowest price among the units (or the property's own price when it has none).
+  function priceFrom(p) {
+    var units = unitsOf(p);
+    if (!units.length) return p.price != null ? p.price : null;
+    var prices = units.map(function (u) { return u.price; }).filter(function (v) { return v != null; });
+    return prices.length ? Math.min.apply(null, prices) : null;
+  }
+
+  function range(values) {
+    var v = values.filter(function (x) { return x != null; });
+    if (!v.length) return null;
+    var min = Math.min.apply(null, v), max = Math.max.apply(null, v);
+    return { min: min, max: max, same: min === max };
+  }
+
+  function areaRange(p) {
+    var units = unitsOf(p);
+    return units.length ? range(units.map(function (u) { return u.livingArea; })) : range([p.livingArea]);
+  }
+
+  function roomsRange(p) {
+    var units = unitsOf(p);
+    return units.length ? range(units.map(function (u) { return u.rooms; })) : range([p.rooms]);
+  }
+
+  function areaLabel(p) {
+    var r = areaRange(p);
+    if (!r) return null;
+    return r.same ? fmtArea(r.min) : fmtNumber(r.min) + '\u2009–\u2009' + fmtArea(r.max);
+  }
+
+  function roomsLabel(p) {
+    var r = roomsRange(p);
+    if (!r) return null;
+    return (r.same ? fmtNumber(r.min) : fmtNumber(r.min) + '\u2009–\u2009' + fmtNumber(r.max)) + ' ' + t('unit.rooms');
+  }
+
+  // "209.000 €" for a single home, "ab 107.000 €" when several units share one page.
+  function priceSummary(p) {
+    var from = priceFrom(p);
+    if (from == null) return t('price.onRequest');
+    var label = fmtPrice(from);
+    if (p.marketing === 'rent') label += ' ' + t('unit.perMonth');
+    return unitsOf(p).length > 1 ? t('price.from', { price: label }) : label;
+  }
+
   function pricePerSqm(p) {
     if (p.pricePerSqm) return p.pricePerSqm;
     if (p.price && p.livingArea) return Math.round(p.price / p.livingArea);
@@ -149,10 +197,14 @@
   function cardHTML(p) {
     var badge = badgeFor(p);
     var cover = p.images[0];
+    var units = unitsOf(p);
     var meta = [];
-    if (p.livingArea) meta.push(t('unit.livingShort') + ' ' + fmtArea(p.livingArea));
-    if (p.rooms) meta.push(fmtNumber(p.rooms) + ' ' + t('unit.rooms'));
-    meta.push(priceLabel(p));
+    if (units.length > 1) meta.push(t('units.count', { n: units.length }));
+    var area = areaLabel(p);
+    if (area) meta.push((units.length > 1 ? '' : t('unit.livingShort') + ' ') + area);
+    var rooms = roomsLabel(p);
+    if (rooms) meta.push(rooms);
+    meta.push(priceSummary(p));
     return '' +
       '<article class="card reveal">' +
         '<a class="card__link" href="' + propertyUrl(p) + '">' +
@@ -226,12 +278,13 @@
           navLink('kontakt.html', 'nav.contact', 'contact') +
         '</nav>' +
         '<a class="brand" href="index.html" aria-label="ImmoLux Germany — ' + esc(t('nav.home')) + '">' +
-          '<img class="brand__logo" src="assets/img/brand/logo-header.jpg" alt="ImmoLux Germany" width="720" height="453">' +
-          '<img class="brand__logo brand__logo--light" src="assets/img/brand/logo-header-white.png" alt="" width="720" height="453">' +
+          '<img class="brand__logo" src="assets/img/brand/logo-header.png" alt="ImmoLux Germany" width="760" height="445">' +
+          '<img class="brand__logo brand__logo--light" src="assets/img/brand/logo-header-white.png" alt="" width="760" height="445">' +
         '</a>' +
         '<div class="header__tools">' +
           langSwitch() +
-          '<a class="header__phone" href="tel:' + c.phoneHref + '">' + icon('phone') + '<span>' + esc(c.phone) + '</span></a>' +
+          '<a class="header__phone" href="tel:' + c.phoneHref + '" title="' + esc(t('contact.phoneNote')) + '" aria-label="' + esc(t('contact.phoneCompany') + ': ' + c.phone) + '">' + icon('phone') +
+            '<span><small>' + esc(t('contact.phoneCompany')) + '</small>' + esc(c.phone) + '</span></a>' +
           '<button type="button" class="burger" aria-expanded="false" aria-controls="mobile-menu" aria-label="' + esc(t('nav.menu')) + '">' + icon('menu') + '</button>' +
         '</div>' +
       '</div>' +
@@ -243,7 +296,8 @@
         '</nav>' +
         '<div class="mobile-menu__foot">' +
           langSwitch('lang--large') +
-          '<a class="mobile-menu__contact" href="tel:' + c.phoneHref + '">' + icon('phone') + esc(c.phone) + '</a>' +
+          '<a class="mobile-menu__contact" href="tel:' + c.phoneHref + '" aria-label="' + esc(t('contact.phoneCompany') + ': ' + c.phone) + '">' + icon('phone') +
+            '<span><small>' + esc(t('contact.phoneCompany')) + '</small>' + esc(c.phone) + '</span></a>' +
           '<a class="mobile-menu__contact" href="mailto:' + c.email + '">' + icon('mail') + esc(c.email) + '</a>' +
         '</div>' +
       '</div>';
@@ -282,7 +336,7 @@
       '<div class="container">' +
         '<div class="footer__grid">' +
           '<div class="footer__brand">' +
-            '<a class="footer__logo" href="index.html"><img src="assets/img/brand/logo-full.jpg" alt="ImmoLux Germany Immobilien" width="720" height="617" loading="lazy"></a>' +
+            '<a class="footer__logo" href="index.html"><img src="assets/img/brand/logo-full.png" alt="ImmoLux Germany Immobilien" width="760" height="538" loading="lazy"></a>' +
           '</div>' +
           '<div class="footer__col">' +
             '<p class="footer__heading">' + esc(t('footer.properties')) + '</p>' +
@@ -304,7 +358,7 @@
             '<p class="footer__office">' + esc(CONFIG.company) + '</p>' +
             '<address>' +
               esc(L(CONFIG.region)) + '<br>' +
-              '<a href="tel:' + c.phoneHref + '">' + esc(c.phone) + '</a><br>' +
+              esc(t('contact.phoneCompany')) + ': <a href="tel:' + c.phoneHref + '">' + esc(c.phone) + '</a><br>' +
               '<a href="mailto:' + c.email + '">' + esc(c.email) + '</a>' +
             '</address>' +
           '</div>' +
@@ -560,6 +614,8 @@
     get lang() { return lang; },
     onRender: onRender,
     fmtNumber: fmtNumber, fmtPrice: fmtPrice, fmtArea: fmtArea, priceLabel: priceLabel, pricePerSqm: pricePerSqm,
+    unitsOf: unitsOf, priceFrom: priceFrom, areaRange: areaRange, roomsRange: roomsRange,
+    areaLabel: areaLabel, roomsLabel: roomsLabel, priceSummary: priceSummary,
     esc: esc, icon: icon,
     imgUrl: imgUrl, isNew: isNew, badgeFor: badgeFor, locationLabel: locationLabel,
     propertyUrl: propertyUrl, getProperty: getProperty, cardHTML: cardHTML,

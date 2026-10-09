@@ -14,7 +14,8 @@
     root.innerHTML =
       '<div class="reveal">' +
         '<div class="contact-list">' +
-          '<a class="contact-item" href="tel:' + c.phoneHref + '">' + icon('phone') + '<span><small>' + esc(t('contact.phone')) + '</small><strong>' + esc(c.phone) + '</strong></span></a>' +
+          '<a class="contact-item" href="tel:' + c.phoneHref + '">' + icon('phone') + '<span><small>' + esc(t('contact.phoneCompany')) + '</small><strong>' + esc(c.phone) + '</strong>' +
+            '<em class="contact-item__note">' + esc(t('contact.phoneNote')) + '</em></span></a>' +
           '<a class="contact-item" href="mailto:' + c.email + '">' + icon('mail') + '<span><small>' + esc(t('contact.email')) + '</small><strong>' + esc(c.email) + '</strong></span></a>' +
           '<div class="contact-item">' + icon('pin') + '<span><small>' + esc(t('contact.region')) + '</small><strong>' + esc(IL.L(IL.config.region)) + '</strong></span></div>' +
         '</div>' +

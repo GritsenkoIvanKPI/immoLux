@@ -8,7 +8,7 @@ window.IMMOLUX_CONFIG = {
 
   // Main contact shown in header, footer and on the contact page.
   contact: {
-    email: 'o.andasova@web.de',
+    email: 'immolux-immobilien@gmx.de',
     phone: '0152 5393 6164',
     phoneHref: '+4915253936164'
   },
@@ -19,7 +19,7 @@ window.IMMOLUX_CONFIG = {
       name: 'Oksana Andasova',
       initials: 'OA',
       photo: null, // e.g. 'assets/img/team/oksana.jpg'
-      email: 'o.andasova@web.de',
+      email: 'immolux-immobilien@gmx.de',
       phone: '0152 5393 6164',
       phoneHref: '+4915253936164'
     }

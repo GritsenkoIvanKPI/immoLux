@@ -5,9 +5,11 @@
 desktop.png
 desktop2.png
 
-# Original source material (photos as delivered, client exposé)
+# Original source material (photos as delivered, client exposés, Word descriptions)
 photo/
+Іммолюкс/
 *.pdf
+*.docx
 
 # Internal workflow notes
 CLAUDE.md
