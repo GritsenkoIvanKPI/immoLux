@@ -22,6 +22,9 @@
    facts         key/value rows for the "Objektdaten" table
    highlights    bullet list for "Ausstattung"
    agent         key from IMMOLUX_CONFIG.agents
+   imageDir      Optional: photo folder to use instead of assets/img/properties/<id>/
+                 (lets several listings in the same building share one folder)
+   roomsPlan     Optional: room list from the floor plan (single apartments)
 
    units         Optional: several apartments in the same building, each with its own
                  photos, price and floor plan. A unit has:
@@ -29,6 +32,8 @@
                  status, facts, roomsPlan (room list from the floor plan), images.
 */
 window.IMMOLUX_PROPERTIES = [
+  /* ---------- Leipzig-Breitenfeld: three apartments in the same building, listed separately.
+     All three share the photo folder assets/img/properties/leipzig-breitenfeld-4-zimmer/ (imageDir). ---------- */
   {
     id: 'leipzig-breitenfeld-4-zimmer',
     ref: 'IL-001',
@@ -36,206 +41,281 @@ window.IMMOLUX_PROPERTIES = [
     marketing: 'buy',
     type: 'apartment',
     status: 'available',
-    newBuild: true,
+    price: 209000,
+    livingArea: 100.76,
+    rooms: 4,
+    bathrooms: 1,
 
-    location: {
-      city: 'Leipzig',
-      district: 'Breitenfeld',
-      postcode: '04158',
-      lat: 51.405,
-      lng: 12.3445
-    },
+    location: { city: 'Leipzig', district: 'Breitenfeld', postcode: '04158', lat: 51.405, lng: 12.3445 },
 
     title: {
-      de: 'Wohnungen im Neubau – Leipzig-Breitenfeld',
-      en: 'Apartments in a new building – Leipzig-Breitenfeld'
+      de: '4-Zimmer-Wohnung mit Terrasse – Leipzig-Breitenfeld',
+      en: '4-room apartment with terrace – Leipzig-Breitenfeld'
     },
 
     teaser: {
-      de: 'Drei Eigentumswohnungen von 46 bis 101 m² in ruhiger Lage — mit Terrasse, Balkon, Stellplatz und Fußbodenheizung.',
-      en: 'Three freehold apartments from 46 to 101 m² in a quiet location — with terrace, balcony, parking space and underfloor heating.'
+      de: 'Helle 4-Zimmer-Wohnung mit 100,76 m², Terrasse, Gäste-WC, Fußbodenheizung und Stellplatz in ruhiger Lage.',
+      en: 'Bright 4-room apartment with 100.76 m², terrace, guest WC, underfloor heating and parking space in a quiet location.'
     },
 
     description: {
       de: [
-        'In diesem Neubau in Leipzig-Breitenfeld sind derzeit drei Eigentumswohnungen verfügbar: eine 4-Zimmer-Wohnung mit Terrasse, eine 2-Raum-Wohnung im Obergeschoss mit Balkon und eine 2-Raum-Wohnung im Dachgeschoss mit Stellplatz.',
-        'Alle Wohnungen liegen in einer ruhigen und dennoch zentralen Lage. Die Wohnungen können einzeln erworben werden — ob zur Eigennutzung oder als Kapitalanlage.'
+        'Willkommen in Ihrem neuen Zuhause! Diese moderne 4-Zimmer-Wohnung in Leipzig-Breitenfeld besticht durch ihr lichtdurchflutetes Design und hochwertige Ausstattung.',
+        'Die großzügigen Fensterfronten sorgen für ein helles und freundliches Ambiente, während die durchdachte Raumaufteilung Komfort und Funktionalität bietet — ob zur Eigennutzung oder als Kapitalanlage.'
       ],
       en: [
-        'Three freehold apartments are currently available in this new building in Leipzig-Breitenfeld: a 4-room apartment with a terrace, a 2-room apartment on the upper floor with a balcony, and a 2-room apartment on the top floor with a parking space.',
-        'All apartments are in a quiet yet central location and can be purchased individually — whether to live in or as an investment.'
+        'Welcome to your new home! This modern 4-room apartment in Leipzig-Breitenfeld impresses with its light-filled design and high-quality fittings.',
+        'Generous window fronts create a bright, welcoming atmosphere, while the well-considered layout offers both comfort and functionality — whether to live in or as an investment.'
       ]
     },
 
     locationText: {
-      de: [
-        'Die Wohnungen befinden sich in einer ruhigen und dennoch zentralen Lage. Einkaufsmöglichkeiten, Schulen und öffentliche Verkehrsmittel sind in unmittelbarer Nähe und bieten eine perfekte Anbindung an das BMW- und Porsche-Werk.'
-      ],
-      en: [
-        'The apartments are in a quiet yet central location. Shops, schools and public transport are close by and offer excellent connections to the BMW and Porsche plants.'
-      ]
+      de: ['Die Wohnung befindet sich in einer ruhigen und dennoch zentralen Lage. Einkaufsmöglichkeiten, Schulen und öffentliche Verkehrsmittel sind in unmittelbarer Nähe und bieten eine perfekte Anbindung an das BMW- und Porsche-Werk.'],
+      en: ['The apartment is in a quiet yet central location. Shops, schools and public transport are close by and offer excellent connections to the BMW and Porsche plants.']
     },
 
     facts: [
-      { label: { de: 'Objektart', en: 'Property type' }, value: { de: 'Eigentumswohnungen, Neubau', en: 'Freehold apartments, new build' } },
-      { label: { de: 'Verfügbare Wohnungen', en: 'Available apartments' }, value: { de: '3 (einzeln erwerbbar)', en: '3 (available individually)' } },
-      { label: { de: 'Wohnflächen', en: 'Living areas' }, value: { de: '46,11 m² – 100,76 m²', en: '46.11 m² – 100.76 m²' } },
-      { label: { de: 'Zimmer', en: 'Rooms' }, value: { de: '2 – 4', en: '2 – 4' } },
+      { label: { de: 'Objektart', en: 'Property type' }, value: { de: 'Eigentumswohnung', en: 'Freehold apartment' } },
+      { label: { de: 'Wohnung', en: 'Apartment' }, value: { de: 'WE 4', en: 'Unit 4' } },
+      { label: { de: 'Zimmer', en: 'Rooms' }, value: { de: '4 (Wohnzimmer, Schlafzimmer, Kinder-/Arbeitszimmer)', en: '4 (living room, bedroom, children’s room / study)' } },
+      { label: { de: 'Badezimmer', en: 'Bathroom' }, value: { de: '1 modernes Bad mit Dusche und Badewanne, zusätzliches Gäste-WC', en: '1 modern bathroom with shower and bathtub, plus a guest WC' } },
+      { label: { de: 'Terrasse', en: 'Terrace' }, value: { de: 'Großzügiger Platz für Sitzmöbel', en: 'Generous space for outdoor furniture' } },
+      { label: { de: 'Fußboden', en: 'Flooring' }, value: { de: 'Hochwertiges Laminat in den Wohnräumen', en: 'High-quality laminate in the living areas' } },
+      { label: { de: 'Heizung', en: 'Heating' }, value: { de: 'Fußbodenheizung in allen Räumen', en: 'Underfloor heating in all rooms' } },
+      { label: { de: 'Stellplatz', en: 'Parking' }, value: { de: 'Offener Stellplatz vorhanden', en: 'Open parking space available' } },
       { label: { de: 'Lage', en: 'Location' }, value: { de: '04158 Leipzig, Ortsteil Breitenfeld', en: '04158 Leipzig, Breitenfeld district' } }
+    ],
+
+    roomsPlan: [
+      { de: 'Wohnen', en: 'Living room', area: 22.68 },
+      { de: 'Schlafen', en: 'Bedroom', area: 15.53 },
+      { de: 'Kind', en: 'Children’s room', area: 14.90 },
+      { de: 'Kind', en: 'Children’s room', area: 11.33 },
+      { de: 'Flur', en: 'Hallway', area: 15.04 },
+      { de: 'Küche', en: 'Kitchen', area: 6.82 },
+      { de: 'Bad/WC', en: 'Bathroom/WC', area: 6.67 },
+      { de: 'Abstellraum', en: 'Storage room', area: 2.95 },
+      { de: 'Gäste-WC', en: 'Guest WC', area: 2.02 }
     ],
 
     highlights: {
       de: [
         'Lichtdurchflutetes Design mit großzügigen Fensterfronten',
-        'Fußbodenheizung und hochwertiges Laminat in den Wohnräumen',
-        'Terrasse, Balkon und Stellplatz je nach Wohnung',
-        'Wohnungen einzeln erwerbbar — zur Eigennutzung oder als Kapitalanlage',
+        'Terrasse mit großzügigem Platz für Sitzmöbel',
+        'Fußbodenheizung in allen Räumen, hochwertiges Laminat',
+        'Bad mit Dusche und Badewanne plus Gäste-WC',
+        'Offener Stellplatz',
         'Schulen, Einkauf und ÖPNV in unmittelbarer Nähe',
         'Sehr gute Anbindung an das BMW- und Porsche-Werk'
       ],
       en: [
         'Light-filled design with generous window fronts',
-        'Underfloor heating and high-quality laminate in the living areas',
-        'Terrace, balcony and parking space depending on the apartment',
-        'Apartments available individually — to live in or as an investment',
+        'Terrace with generous space for outdoor furniture',
+        'Underfloor heating in all rooms, high-quality laminate',
+        'Bathroom with shower and bathtub plus a guest WC',
+        'Open parking space',
         'Schools, shops and public transport close by',
         'Excellent connections to the BMW and Porsche plants'
       ]
     },
 
-    // Building and surroundings. Each apartment has its own photos further below.
     images: [
       { src: '01-aussenansicht.jpg', alt: { de: 'Außenansicht des Mehrfamilienhauses mit verglastem Treppenhaus', en: 'Exterior of the apartment building with glazed stairwell' } },
       { src: '02-eingang.jpg', alt: { de: 'Hauseingang und gepflasterter Hof', en: 'Building entrance and paved courtyard' } },
       { src: '03-hof.jpg', alt: { de: 'Hof mit Stellplätzen und überdachtem Bereich', en: 'Courtyard with parking and covered area' } },
       { src: '04-strasse.jpg', alt: { de: 'Straßenansicht mit Giebelseite des Hauses', en: 'Street view with the gable side of the building' } },
-      { src: '05-treppenhaus.jpg', alt: { de: 'Helles Treppenhaus', en: 'Bright stairwell' } }
+      { src: '05-treppenhaus.jpg', alt: { de: 'Helles Treppenhaus', en: 'Bright stairwell' } },
+      { src: '06-grundriss-3d.jpg', kind: 'floorplan', alt: { de: 'Grundriss, 3D-Ansicht', en: 'Floor plan, 3D view' } },
+      { src: '07-grundriss.jpg', kind: 'floorplan', alt: { de: 'Grundriss', en: 'Floor plan' } }
     ],
 
-    units: [
-      {
-        id: 'we-4',
-        ref: 'WE 4',
-        title: { de: '4-Zimmer-Wohnung mit Terrasse', en: '4-room apartment with terrace' },
-        rooms: 4,
-        livingArea: 100.76,
-        price: 209000,
-        status: 'available',
-        description: {
-          de: [
-            'Willkommen in Ihrem neuen Zuhause! Diese moderne 4-Zimmer-Wohnung besticht durch ihr lichtdurchflutetes Design und hochwertige Ausstattung.',
-            'Die großzügigen Fensterfronten sorgen für ein helles und freundliches Ambiente, während die durchdachte Raumaufteilung Komfort und Funktionalität bietet.'
-          ],
-          en: [
-            'Welcome to your new home! This modern 4-room apartment impresses with its light-filled design and high-quality fittings.',
-            'Generous window fronts create a bright, welcoming atmosphere, while the well-considered layout offers both comfort and functionality.'
-          ]
-        },
-        facts: [
-          { label: { de: 'Zimmer', en: 'Rooms' }, value: { de: '4 (Wohnzimmer, Schlafzimmer, Kinder-/Arbeitszimmer)', en: '4 (living room, bedroom, children’s room / study)' } },
-          { label: { de: 'Badezimmer', en: 'Bathroom' }, value: { de: '1 modernes Bad mit Dusche und Badewanne, zusätzliches Gäste-WC', en: '1 modern bathroom with shower and bathtub, plus a guest WC' } },
-          { label: { de: 'Terrasse', en: 'Terrace' }, value: { de: 'Großzügiger Platz für Sitzmöbel', en: 'Generous space for outdoor furniture' } },
-          { label: { de: 'Fußboden', en: 'Flooring' }, value: { de: 'Hochwertiges Laminat in den Wohnräumen', en: 'High-quality laminate in the living areas' } },
-          { label: { de: 'Heizung', en: 'Heating' }, value: { de: 'Fußbodenheizung in allen Räumen', en: 'Underfloor heating in all rooms' } },
-          { label: { de: 'Stellplatz', en: 'Parking' }, value: { de: 'Offener Stellplatz vorhanden', en: 'Open parking space available' } }
-        ],
-        roomsPlan: [
-          { de: 'Wohnen', en: 'Living room', area: 22.68 },
-          { de: 'Schlafen', en: 'Bedroom', area: 15.53 },
-          { de: 'Kind', en: 'Children’s room', area: 14.90 },
-          { de: 'Kind', en: 'Children’s room', area: 11.33 },
-          { de: 'Flur', en: 'Hallway', area: 15.04 },
-          { de: 'Küche', en: 'Kitchen', area: 6.82 },
-          { de: 'Bad/WC', en: 'Bathroom/WC', area: 6.67 },
-          { de: 'Abstellraum', en: 'Storage room', area: 2.95 },
-          { de: 'Gäste-WC', en: 'Guest WC', area: 2.02 }
-        ],
-        images: [
-          { src: '06-grundriss-3d.jpg', kind: 'floorplan', alt: { de: 'Grundriss Wohnung 4, 3D-Ansicht', en: 'Floor plan apartment 4, 3D view' } },
-          { src: '07-grundriss.jpg', kind: 'floorplan', alt: { de: 'Grundriss Wohnung 4', en: 'Floor plan apartment 4' } }
-        ]
-      },
+    agent: 'oksana'
+  },
 
-      {
-        id: 'we-5',
-        ref: 'WE 5',
-        title: { de: '2-Raum-Wohnung mit Balkon', en: '2-room apartment with balcony' },
-        rooms: 2,
-        livingArea: 54.97,
-        floor: { de: 'Obergeschoss', en: 'Upper floor' },
-        price: null, // Preis auf Anfrage — noch nicht festgelegt
-        status: 'available',
-        description: {
-          de: ['Helle 2-Raum-Wohnung im Obergeschoss mit Wohn-/Essbereich, separatem Schlafzimmer, Abstellraum und eigenem Balkon.'],
-          en: ['Bright 2-room apartment on the upper floor with a living/dining area, separate bedroom, storage room and its own balcony.']
-        },
-        facts: [
-          { label: { de: 'Lage im Haus', en: 'Position in the building' }, value: { de: 'Obergeschoss', en: 'Upper floor' } },
-          { label: { de: 'Aufteilung', en: 'Layout' }, value: { de: 'Schlafen, Wohnen/Essen, Küche, Bad/WC, Abstellraum, Flur, Balkon', en: 'Bedroom, living/dining, kitchen, bathroom/WC, storage room, hallway, balcony' } },
-          { label: { de: 'Balkon', en: 'Balcony' }, value: { de: '2,17 m²', en: '2.17 m²' } },
-          { label: { de: 'Miteigentumsanteil', en: 'Co-ownership share' }, value: { de: '61,702/1.000', en: '61.702/1,000' } },
-          { label: { de: 'Aufteilungsplan', en: 'Subdivision plan' }, value: { de: 'Nr. 5', en: 'No. 5' } }
-        ],
-        roomsPlan: [
-          { de: 'Wohnen/Essen', en: 'Living/dining', area: 19.79 },
-          { de: 'Schlafen', en: 'Bedroom', area: 12.69 },
-          { de: 'Flur', en: 'Hallway', area: 9.30 },
-          { de: 'Bad/WC', en: 'Bathroom/WC', area: 6.04 },
-          { de: 'Küche', en: 'Kitchen', area: 3.09 },
-          { de: 'Abstellraum', en: 'Storage room', area: 1.90 }
-        ],
-        images: [
-          { src: 'we5-01-wohnen.jpg', alt: { de: 'Wohn- und Essbereich', en: 'Living and dining area' } },
-          { src: 'we5-02-schlafen.jpg', alt: { de: 'Schlafzimmer', en: 'Bedroom' } },
-          { src: 'we5-03-schlafen.jpg', alt: { de: 'Schlafzimmer mit Einbauschrank', en: 'Bedroom with fitted wardrobe' } },
-          { src: 'we5-04-bad.jpg', alt: { de: 'Bad mit Dusche und WC', en: 'Bathroom with shower and WC' } },
-          { src: 'we5-05-flur.jpg', alt: { de: 'Flur mit Garderobe', en: 'Hallway with wardrobe' } },
-          { src: 'we5-07-balkon.jpg', alt: { de: 'Balkon mit Blick ins Grüne', en: 'Balcony with a view of greenery' } },
-          { src: 'we5-06-eingang.jpg', alt: { de: 'Wohnungseingang', en: 'Apartment entrance' } },
-          { src: 'we5-08-treppenhaus.jpg', alt: { de: 'Verglastes Treppenhaus von außen', en: 'Glazed stairwell seen from outside' } },
-          { src: 'we5-09-aussen.jpg', alt: { de: 'Außenansicht', en: 'Exterior view' } },
-          { src: 'we5-grundriss-3d.jpg', kind: 'floorplan', alt: { de: 'Grundriss Wohnung 5, 3D-Ansicht', en: 'Floor plan apartment 5, 3D view' } }
-        ]
-      },
+  {
+    id: 'leipzig-breitenfeld-2-zimmer-dachgeschoss',
+    imageDir: 'leipzig-breitenfeld-4-zimmer',
+    ref: 'IL-003',
+    listedAt: '2026-09-18',
+    marketing: 'buy',
+    type: 'apartment',
+    status: 'available',
+    price: 107000,
+    livingArea: 46.11,
+    rooms: 2,
+    bathrooms: 1,
 
-      {
-        id: 'we-15',
-        ref: 'WE 15',
-        title: { de: '2-Raum-Wohnung im Dachgeschoss', en: '2-room apartment on the top floor' },
-        rooms: 2,
-        livingArea: 46.11,
-        floor: { de: 'Dachgeschoss', en: 'Top floor' },
-        price: 107000,
-        status: 'available',
-        description: {
-          de: ['2-Raum-Wohnung im Dachgeschoss mit Wohn-/Essbereich, separatem Schlafzimmer und Abstellraum. Ein Stellplatz (Nr. 1) gehört zur Wohnung.'],
-          en: ['2-room apartment on the top floor with a living/dining area, separate bedroom and storage room. A parking space (no. 1) belongs to the apartment.']
-        },
-        facts: [
-          { label: { de: 'Lage im Haus', en: 'Position in the building' }, value: { de: 'Dachgeschoss', en: 'Top floor' } },
-          { label: { de: 'Aufteilung', en: 'Layout' }, value: { de: 'Schlafen, Wohnen/Essen, Küche, Bad/WC, Abstellraum, Flur', en: 'Bedroom, living/dining, kitchen, bathroom/WC, storage room, hallway' } },
-          { label: { de: 'Stellplatz', en: 'Parking' }, value: { de: 'Stellplatz Nr. 1', en: 'Parking space no. 1' } },
-          { label: { de: 'Miteigentumsanteil', en: 'Co-ownership share' }, value: { de: '51,757/1.000', en: '51.757/1,000' } }
-        ],
-        roomsPlan: [
-          { de: 'Wohnen', en: 'Living room', area: 16.63 },
-          { de: 'Schlafen', en: 'Bedroom', area: 9.89 },
-          { de: 'Flur', en: 'Hallway', area: 7.57 },
-          { de: 'Bad', en: 'Bathroom', area: 6.15 },
-          { de: 'Küche', en: 'Kitchen', area: 3.97 },
-          { de: 'Abstellraum', en: 'Storage room', area: 1.90 }
-        ],
-        images: [
-          { src: 'we15-01-wohnen.jpg', alt: { de: 'Wohnbereich', en: 'Living area' } },
-          { src: 'we15-02-schlafen.jpg', alt: { de: 'Schlafzimmer mit Dachfenster', en: 'Bedroom with skylight' } },
-          { src: 'we15-03-schlafen.jpg', alt: { de: 'Weiterer Schlafbereich', en: 'Further sleeping area' } },
-          { src: 'we15-04-kueche.jpg', alt: { de: 'Küche', en: 'Kitchen' } },
-          { src: 'we15-05-bad.jpg', alt: { de: 'Bad mit Badewanne und Dusche', en: 'Bathroom with bathtub and shower' } },
-          { src: 'we15-06-flur.jpg', alt: { de: 'Flur', en: 'Hallway' } },
-          { src: 'we15-grundriss-3d.jpg', kind: 'floorplan', alt: { de: 'Grundriss Wohnung 15, 3D-Ansicht', en: 'Floor plan apartment 15, 3D view' } },
-          { src: 'we15-aufteilungsplan.jpg', kind: 'floorplan', alt: { de: 'Aufteilungsplan Dachgeschoss', en: 'Subdivision plan, top floor' } }
-        ]
-      }
+    location: { city: 'Leipzig', district: 'Breitenfeld', postcode: '04158', lat: 51.405, lng: 12.3445 },
+
+    title: {
+      de: '2-Raum-Wohnung im Dachgeschoss – Leipzig-Breitenfeld',
+      en: '2-room apartment on the top floor – Leipzig-Breitenfeld'
+    },
+
+    teaser: {
+      de: 'Gemütliche 2-Raum-Wohnung mit 46,11 m² im Dachgeschoss — mit Abstellraum und eigenem Stellplatz.',
+      en: 'Cosy 2-room apartment with 46.11 m² on the top floor — with storage room and its own parking space.'
+    },
+
+    description: {
+      de: [
+        '2-Raum-Wohnung im Dachgeschoss eines Mehrfamilienhauses in Leipzig-Breitenfeld — mit Wohn-/Essbereich, separatem Schlafzimmer und Abstellraum.',
+        'Ein Stellplatz (Nr. 1) gehört zur Wohnung. Ideal zur Eigennutzung oder als Kapitalanlage.'
+      ],
+      en: [
+        '2-room apartment on the top floor of an apartment building in Leipzig-Breitenfeld — with a living/dining area, separate bedroom and storage room.',
+        'A parking space (no. 1) belongs to the apartment. Ideal to live in or as an investment.'
+      ]
+    },
+
+    locationText: {
+      de: ['Die Wohnung befindet sich in einer ruhigen und dennoch zentralen Lage. Einkaufsmöglichkeiten, Schulen und öffentliche Verkehrsmittel sind in unmittelbarer Nähe und bieten eine perfekte Anbindung an das BMW- und Porsche-Werk.'],
+      en: ['The apartment is in a quiet yet central location. Shops, schools and public transport are close by and offer excellent connections to the BMW and Porsche plants.']
+    },
+
+    facts: [
+      { label: { de: 'Objektart', en: 'Property type' }, value: { de: 'Eigentumswohnung', en: 'Freehold apartment' } },
+      { label: { de: 'Wohnung', en: 'Apartment' }, value: { de: 'WE 15', en: 'Unit 15' } },
+      { label: { de: 'Lage im Haus', en: 'Position in the building' }, value: { de: 'Dachgeschoss', en: 'Top floor' } },
+      { label: { de: 'Aufteilung', en: 'Layout' }, value: { de: 'Schlafen, Wohnen/Essen, Küche, Bad/WC, Abstellraum, Flur', en: 'Bedroom, living/dining, kitchen, bathroom/WC, storage room, hallway' } },
+      { label: { de: 'Stellplatz', en: 'Parking' }, value: { de: 'Stellplatz Nr. 1', en: 'Parking space no. 1' } },
+      { label: { de: 'Miteigentumsanteil', en: 'Co-ownership share' }, value: { de: '51,757/1.000', en: '51.757/1,000' } },
+      { label: { de: 'Lage', en: 'Location' }, value: { de: '04158 Leipzig, Ortsteil Breitenfeld', en: '04158 Leipzig, Breitenfeld district' } }
+    ],
+
+    roomsPlan: [
+      { de: 'Wohnen', en: 'Living room', area: 16.63 },
+      { de: 'Schlafen', en: 'Bedroom', area: 9.89 },
+      { de: 'Flur', en: 'Hallway', area: 7.57 },
+      { de: 'Bad', en: 'Bathroom', area: 6.15 },
+      { de: 'Küche', en: 'Kitchen', area: 3.97 },
+      { de: 'Abstellraum', en: 'Storage room', area: 1.90 }
+    ],
+
+    highlights: {
+      de: [
+        'Wohnung im Dachgeschoss mit Dachfenster',
+        'Bad mit Badewanne und Dusche',
+        'Separates Schlafzimmer und Abstellraum',
+        'Eigener Stellplatz (Nr. 1)',
+        'Schulen, Einkauf und ÖPNV in unmittelbarer Nähe',
+        'Sehr gute Anbindung an das BMW- und Porsche-Werk'
+      ],
+      en: [
+        'Top-floor apartment with skylight',
+        'Bathroom with bathtub and shower',
+        'Separate bedroom and storage room',
+        'Own parking space (no. 1)',
+        'Schools, shops and public transport close by',
+        'Excellent connections to the BMW and Porsche plants'
+      ]
+    },
+
+    images: [
+      { src: 'we15-01-wohnen.jpg', alt: { de: 'Wohnbereich', en: 'Living area' } },
+      { src: 'we15-02-schlafen.jpg', alt: { de: 'Schlafzimmer mit Dachfenster', en: 'Bedroom with skylight' } },
+      { src: 'we15-03-schlafen.jpg', alt: { de: 'Weiterer Schlafbereich', en: 'Further sleeping area' } },
+      { src: 'we15-04-kueche.jpg', alt: { de: 'Küche', en: 'Kitchen' } },
+      { src: 'we15-05-bad.jpg', alt: { de: 'Bad mit Badewanne und Dusche', en: 'Bathroom with bathtub and shower' } },
+      { src: 'we15-06-flur.jpg', alt: { de: 'Flur', en: 'Hallway' } },
+      { src: 'we15-grundriss-3d.jpg', kind: 'floorplan', alt: { de: 'Grundriss, 3D-Ansicht', en: 'Floor plan, 3D view' } },
+      { src: 'we15-aufteilungsplan.jpg', kind: 'floorplan', alt: { de: 'Aufteilungsplan Dachgeschoss', en: 'Subdivision plan, top floor' } }
+    ],
+
+    agent: 'oksana'
+  },
+
+  {
+    id: 'leipzig-breitenfeld-2-zimmer-balkon',
+    imageDir: 'leipzig-breitenfeld-4-zimmer',
+    ref: 'IL-004',
+    listedAt: '2026-09-18',
+    marketing: 'buy',
+    type: 'apartment',
+    status: 'available',
+    price: null, // Preis auf Anfrage — noch nicht festgelegt
+    livingArea: 54.97,
+    rooms: 2,
+    bathrooms: 1,
+
+    location: { city: 'Leipzig', district: 'Breitenfeld', postcode: '04158', lat: 51.405, lng: 12.3445 },
+
+    title: {
+      de: '2-Raum-Wohnung mit Balkon – Leipzig-Breitenfeld',
+      en: '2-room apartment with balcony – Leipzig-Breitenfeld'
+    },
+
+    teaser: {
+      de: 'Helle 2-Raum-Wohnung mit 54,97 m² im Obergeschoss — mit Balkon, Abstellraum und separatem Schlafzimmer.',
+      en: 'Bright 2-room apartment with 54.97 m² on the upper floor — with balcony, storage room and separate bedroom.'
+    },
+
+    description: {
+      de: [
+        'Helle 2-Raum-Wohnung im Obergeschoss eines Mehrfamilienhauses in Leipzig-Breitenfeld — mit Wohn-/Essbereich, separatem Schlafzimmer, Abstellraum und eigenem Balkon.',
+        'Die Wohnung eignet sich ideal zur Eigennutzung oder als Kapitalanlage.'
+      ],
+      en: [
+        'Bright 2-room apartment on the upper floor of an apartment building in Leipzig-Breitenfeld — with a living/dining area, separate bedroom, storage room and its own balcony.',
+        'The apartment is ideal to live in or as an investment.'
+      ]
+    },
+
+    locationText: {
+      de: ['Die Wohnung befindet sich in einer ruhigen und dennoch zentralen Lage. Einkaufsmöglichkeiten, Schulen und öffentliche Verkehrsmittel sind in unmittelbarer Nähe und bieten eine perfekte Anbindung an das BMW- und Porsche-Werk.'],
+      en: ['The apartment is in a quiet yet central location. Shops, schools and public transport are close by and offer excellent connections to the BMW and Porsche plants.']
+    },
+
+    facts: [
+      { label: { de: 'Objektart', en: 'Property type' }, value: { de: 'Eigentumswohnung', en: 'Freehold apartment' } },
+      { label: { de: 'Wohnung', en: 'Apartment' }, value: { de: 'WE 5', en: 'Unit 5' } },
+      { label: { de: 'Lage im Haus', en: 'Position in the building' }, value: { de: 'Obergeschoss', en: 'Upper floor' } },
+      { label: { de: 'Aufteilung', en: 'Layout' }, value: { de: 'Schlafen, Wohnen/Essen, Küche, Bad/WC, Abstellraum, Flur, Balkon', en: 'Bedroom, living/dining, kitchen, bathroom/WC, storage room, hallway, balcony' } },
+      { label: { de: 'Balkon', en: 'Balcony' }, value: { de: '2,17 m²', en: '2.17 m²' } },
+      { label: { de: 'Miteigentumsanteil', en: 'Co-ownership share' }, value: { de: '61,702/1.000', en: '61.702/1,000' } },
+      { label: { de: 'Aufteilungsplan', en: 'Subdivision plan' }, value: { de: 'Nr. 5', en: 'No. 5' } },
+      { label: { de: 'Lage', en: 'Location' }, value: { de: '04158 Leipzig, Ortsteil Breitenfeld', en: '04158 Leipzig, Breitenfeld district' } }
+    ],
+
+    roomsPlan: [
+      { de: 'Wohnen/Essen', en: 'Living/dining', area: 19.79 },
+      { de: 'Schlafen', en: 'Bedroom', area: 12.69 },
+      { de: 'Flur', en: 'Hallway', area: 9.30 },
+      { de: 'Bad/WC', en: 'Bathroom/WC', area: 6.04 },
+      { de: 'Küche', en: 'Kitchen', area: 3.09 },
+      { de: 'Abstellraum', en: 'Storage room', area: 1.90 }
+    ],
+
+    highlights: {
+      de: [
+        'Helle Wohnung im Obergeschoss',
+        'Eigener Balkon mit Blick ins Grüne',
+        'Separates Schlafzimmer mit Einbauschrank',
+        'Abstellraum in der Wohnung',
+        'Schulen, Einkauf und ÖPNV in unmittelbarer Nähe',
+        'Sehr gute Anbindung an das BMW- und Porsche-Werk'
+      ],
+      en: [
+        'Bright apartment on the upper floor',
+        'Own balcony with a view of greenery',
+        'Separate bedroom with fitted wardrobe',
+        'Storage room inside the apartment',
+        'Schools, shops and public transport close by',
+        'Excellent connections to the BMW and Porsche plants'
+      ]
+    },
+
+    images: [
+      { src: 'we5-01-wohnen.jpg', alt: { de: 'Wohn- und Essbereich', en: 'Living and dining area' } },
+      { src: 'we5-02-schlafen.jpg', alt: { de: 'Schlafzimmer', en: 'Bedroom' } },
+      { src: 'we5-03-schlafen.jpg', alt: { de: 'Schlafzimmer mit Einbauschrank', en: 'Bedroom with fitted wardrobe' } },
+      { src: 'we5-04-bad.jpg', alt: { de: 'Bad mit Dusche und WC', en: 'Bathroom with shower and WC' } },
+      { src: 'we5-05-flur.jpg', alt: { de: 'Flur mit Garderobe', en: 'Hallway with wardrobe' } },
+      { src: 'we5-07-balkon.jpg', alt: { de: 'Balkon mit Blick ins Grüne', en: 'Balcony with a view of greenery' } },
+      { src: 'we5-06-eingang.jpg', alt: { de: 'Wohnungseingang', en: 'Apartment entrance' } },
+      { src: 'we5-08-treppenhaus.jpg', alt: { de: 'Verglastes Treppenhaus von außen', en: 'Glazed stairwell seen from outside' } },
+      { src: 'we5-09-aussen.jpg', alt: { de: 'Außenansicht', en: 'Exterior view' } },
+      { src: 'we5-grundriss-3d.jpg', kind: 'floorplan', alt: { de: 'Grundriss, 3D-Ansicht', en: 'Floor plan, 3D view' } }
     ],
 
     agent: 'oksana'
@@ -382,9 +462,12 @@ window.IMMOLUX_PROPERTIES = [
           { label: { de: 'Wohnfläche', en: 'Living area' }, value: { de: 'Auf Anfrage', en: 'On request' } }
         ],
         images: [
-          { src: 'we3-01-zimmer.jpg', alt: { de: 'Zimmer', en: 'Room' } },
-          { src: 'we3-02-kueche.jpg', alt: { de: 'Küche mit Essplatz', en: 'Kitchen with dining area' } },
-          { src: 'we3-03-flur.jpg', alt: { de: 'Flur', en: 'Hallway' } }
+          { src: 'we3-01-wohnen.jpg', alt: { de: 'Wohnzimmer mit Sofa', en: 'Living room with sofa' } },
+          { src: 'we3-02-kueche.jpg', alt: { de: 'Küche', en: 'Kitchen' } },
+          { src: 'we3-03-essen.jpg', alt: { de: 'Küche mit Essplatz', en: 'Kitchen with dining area' } },
+          { src: 'we3-04-wohnen.jpg', alt: { de: 'Wohnraum', en: 'Living room' } },
+          { src: 'we3-05-zimmer.jpg', alt: { de: 'Zimmer', en: 'Room' } },
+          { src: 'we3-06-flur.jpg', alt: { de: 'Flur', en: 'Hallway' } }
         ]
       }
     ],

@@ -3,6 +3,7 @@ window.IMMOLUX_I18N = {
   de: {
     'meta.home': 'ImmoLux Germany — Immobilien in Leipzig',
     'meta.listings': 'Immobilienangebote — ImmoLux Germany',
+    'meta.houses': 'Modulhäuser in SIP-Bauweise — ImmoLux Germany',
     'meta.contact': 'Kontakt — ImmoLux Germany',
     'meta.imprint': 'Impressum — ImmoLux Germany',
     'meta.privacy': 'Datenschutz — ImmoLux Germany',
@@ -10,6 +11,7 @@ window.IMMOLUX_I18N = {
 
     'nav.home': 'Start',
     'nav.listings': 'Immobilien',
+    'nav.houses': 'Modulhäuser',
     'nav.contact': 'Kontakt',
     'nav.menu': 'Menü',
     'nav.close': 'Menü schließen',
@@ -136,6 +138,7 @@ window.IMMOLUX_I18N = {
     'form.subject.buy': 'Immobilie kaufen',
     'form.subject.search': 'Suchprofil hinterlegen',
     'form.subject.sell': 'Immobilie verkaufen',
+    'form.subject.house': 'Modulhaus anfragen',
     'form.subject.other': 'Allgemeine Anfrage',
     'form.message': 'Nachricht',
     'form.placeholder': 'Eingeben',
@@ -173,6 +176,7 @@ window.IMMOLUX_I18N = {
   en: {
     'meta.home': 'ImmoLux Germany — Real estate in Leipzig',
     'meta.listings': 'Property listings — ImmoLux Germany',
+    'meta.houses': 'Modular SIP homes — ImmoLux Germany',
     'meta.contact': 'Contact — ImmoLux Germany',
     'meta.imprint': 'Legal notice — ImmoLux Germany',
     'meta.privacy': 'Privacy policy — ImmoLux Germany',
@@ -180,6 +184,7 @@ window.IMMOLUX_I18N = {
 
     'nav.home': 'Home',
     'nav.listings': 'Properties',
+    'nav.houses': 'Modular homes',
     'nav.contact': 'Contact',
     'nav.menu': 'Menu',
     'nav.close': 'Close menu',
@@ -306,6 +311,7 @@ window.IMMOLUX_I18N = {
     'form.subject.buy': 'Buy a property',
     'form.subject.search': 'Leave a search profile',
     'form.subject.sell': 'Sell my property',
+    'form.subject.house': 'Modular home enquiry',
     'form.subject.other': 'General enquiry',
     'form.message': 'Message',
     'form.placeholder': 'Enter',

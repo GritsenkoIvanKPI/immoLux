@@ -10,6 +10,10 @@ photo/
 Іммолюкс/
 *.pdf
 *.docx
+*.zip
+houses/
+object5/
+правки/
 
 # Internal workflow notes
 CLAUDE.md

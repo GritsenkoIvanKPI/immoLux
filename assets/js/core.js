@@ -168,7 +168,7 @@
   var NEW_DAYS = 30;
 
   function imgUrl(p, img, thumb) {
-    return 'assets/img/properties/' + p.id + '/' + (thumb ? 'thumb-' : '') + img.src;
+    return 'assets/img/properties/' + (p.imageDir || p.id) + '/' + (thumb ? 'thumb-' : '') + img.src;
   }
 
   function isNew(p) {
@@ -274,6 +274,7 @@
         '<nav class="nav" aria-label="Main">' +
           navLink('index.html', 'nav.home', 'home') +
           navLink('immobilien.html', 'nav.listings', 'listings') +
+          navLink('modulhaeuser.html', 'nav.houses', 'houses') +
           navLink('kontakt.html', 'nav.contact', 'contact') +
         '</nav>' +
         '<a class="brand" href="index.html" aria-label="ImmoLux Germany — ' + esc(t('nav.home')) + '">' +
@@ -290,6 +291,7 @@
         '<nav class="mobile-menu__nav" aria-label="Mobile">' +
           navLink('index.html', 'nav.home', 'home') +
           navLink('immobilien.html', 'nav.listings', 'listings') +
+          navLink('modulhaeuser.html', 'nav.houses', 'houses') +
           navLink('kontakt.html', 'nav.contact', 'contact') +
         '</nav>' +
         '<div class="mobile-menu__foot">' +
@@ -340,6 +342,7 @@
             '<p class="footer__heading">' + esc(t('footer.properties')) + '</p>' +
             '<ul>' +
               '<li><a href="immobilien.html">' + esc(t('footer.current')) + '</a></li>' +
+              '<li><a href="modulhaeuser.html">' + esc(t('nav.houses')) + '</a></li>' +
             '</ul>' +
           '</div>' +
           '<div class="footer__col">' +

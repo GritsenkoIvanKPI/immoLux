@@ -212,7 +212,8 @@
           '</section>' +
 
           '<section class="prop-section" id="daten"><h2 class="h2">' + esc(t('prop.facts.title')) + '</h2>' +
-            '<table class="facts"><tbody>' + factsRows + '</tbody></table></section>' +
+            '<table class="facts"><tbody>' + factsRows + '</tbody></table>' +
+            roomsTableFor(p.roomsPlan, t('units.rooms')) + '</section>' +
 
           unitsSection +
 

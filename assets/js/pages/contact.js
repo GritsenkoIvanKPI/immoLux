@@ -1,8 +1,8 @@
-/* Contact page. ?subject=search|buy|sell|other preselects the subject. */
+/* Contact page. ?subject=search|buy|sell|house|other preselects the subject. */
 (function () {
   'use strict';
 
-  var SUBJECTS = ['buy', 'search', 'sell', 'other'];
+  var SUBJECTS = ['buy', 'search', 'sell', 'house', 'other'];
   var preset = new URLSearchParams(location.search).get('subject');
   if (SUBJECTS.indexOf(preset) === -1) preset = 'buy';
 
